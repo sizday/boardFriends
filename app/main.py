@@ -1,5 +1,5 @@
 from flask import Flask
-from config import Config
+from app.config import Config
 from app.models import db
 from app.blueprints import blueprint as basic_endpoints
 
