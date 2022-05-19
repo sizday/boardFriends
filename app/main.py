@@ -1,7 +1,7 @@
 from flask import Flask
-from app.config import Config
-from app.models import db
-from app.blueprints import blueprint as basic_endpoints
+from config import Config
+from models import db
+from blueprints import blueprint as basic_endpoints
 
 app = Flask(__name__)
 app.config.from_object(Config)
