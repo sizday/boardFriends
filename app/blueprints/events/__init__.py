@@ -10,6 +10,10 @@ event_model = namespace.model('Event', {
         readonly=True,
         description='Game identifier'
     ),
+    'name': fields.String(
+        required=True,
+        description='Name of event'
+    ),
     'place': fields.String(
         required=True,
         description='Place of event'
@@ -56,6 +60,7 @@ class Events(Resource):
     def post(self):
         input_data = request.get_json()
         new_event = EventModel(creator_id=input_data['creator_id'],
+                               name=input_data['name'],
                                place=input_data['place'],
                                time=input_data['time'],
                                max_player=input_data['max_player'],
@@ -85,6 +90,7 @@ class Event(Resource):
         input_data = request.get_json()
         event = EventModel.query.filter_by(id=event_id).first()
         event.creator_id = input_data['creator_id']
+        event.name = input_data['name']
         event.place = input_data['place']
         event.time = input_data['time']
         event.max_player = input_data['max_player']

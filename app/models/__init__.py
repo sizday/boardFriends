@@ -21,6 +21,7 @@ favorite_games = db.Table('favorite_games',
 
 class Event(db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    name = db.Column(db.String(255))
     place = db.Column(db.String(255))
     creator_id = db.Column(UUID(as_uuid=True), db.ForeignKey('person.id'))
     time = db.Column(db.String(255))
