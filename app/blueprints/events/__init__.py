@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from app.models import Event as EventModel, Person as PersonModel, db
+from models import Event as EventModel, Person as PersonModel, db
 from flask_restx import Namespace, Resource, fields
 
 namespace = Namespace('events', 'Games endpoints')

@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask_restx import Api
-from app.blueprints.games import namespace as games_ns
-from app.blueprints.events import namespace as events_ns
-from app.blueprints.persons import namespace as person_ns
+from blueprints.games import namespace as games_ns
+from blueprints.events import namespace as events_ns
+from blueprints.persons import namespace as person_ns
 
 async_mode = None
 thread = None

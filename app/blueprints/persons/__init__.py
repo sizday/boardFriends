@@ -1,5 +1,5 @@
 from flask import request
-from app.models import Person as PersonModel, db
+from models import Person as PersonModel, db
 from flask_restx import Namespace, Resource, fields
 
 namespace = Namespace('persons', 'Person endpoints')
