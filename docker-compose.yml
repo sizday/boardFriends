@@ -17,5 +17,7 @@ services:
     command: python main.py
     restart: always
     network_mode: "host"
+    ports:
+      - "5000:80"
     env_file:
       - "app/.env"
