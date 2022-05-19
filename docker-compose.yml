@@ -4,7 +4,6 @@ services:
   db:
     container_name: database
     image: sameersbn/postgresql:10-2
-    restart: always
     networks:
       - overlay
     ports:
@@ -17,7 +16,6 @@ services:
     build:
         context: ./app
     command: python main.py
-    restart: always
     networks:
       - overlay
     ports:
@@ -27,3 +25,4 @@ services:
 
 networks:
   overlay:
+    driver: bridge
