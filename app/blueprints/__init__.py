@@ -1,4 +1,6 @@
 from flask import Blueprint
+import werkzeug
+werkzeug.cached_property = werkzeug.utils.cached_property
 from flask_restplus import Api
 from app.blueprints.games import namespace as games_ns
 from app.blueprints.events import namespace as events_ns
