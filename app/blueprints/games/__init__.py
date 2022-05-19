@@ -1,6 +1,6 @@
 from flask import request
-from app.models import Game as GameModel, db
-from flask_restplus import Namespace, Resource, fields
+from models import Game as GameModel, db
+from flask_restx import Namespace, Resource, fields
 
 namespace = Namespace('games', 'Games endpoints')
 

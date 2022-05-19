@@ -1,7 +1,7 @@
-from flask import request
-from app.models import Event as EventModel, Person as PersonModel, participation, db
-from flask_restplus import Namespace, Resource, fields
-from app.blueprints.persons import person_model
+from flask import jsonify, request
+from models import Event as EventModel, Person as PersonModel, db
+from flask_restx import Namespace, Resource, fields
+from blueprints.persons import person_model
 
 namespace = Namespace('events', 'Events endpoints')
 

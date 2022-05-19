@@ -1,6 +1,6 @@
-from flask import request, jsonify
-from app.models import Person as PersonModel, db
-from flask_restplus import Namespace, Resource, fields
+from flask import request
+from models import Person as PersonModel, db
+from flask_restx import Namespace, Resource, fields
 
 namespace = Namespace('persons', 'Person endpoints')
 
