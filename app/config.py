@@ -7,7 +7,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'secret!'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://sizday:Dionis0799@localhost:5432/boardFriends'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://sizday:Dionis0799@13.38.228.15:5432/boardFriends'
 
 
 class ProductionConfig(Config):
