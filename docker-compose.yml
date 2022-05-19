@@ -4,13 +4,11 @@ services:
   db:
     container_name: database
     image: sameersbn/postgresql:10-2
-    environment:
-       POSTGRES_DB: "boardFriends"
-       POSTGRES_USER: "sizday"
-       POSTGRES_PASSWORD: "Dionis0799"
     restart: always
     ports:
       - "5432:5432"
+    env_file:
+      - ".env"
 
   flask:
     container_name: api
@@ -19,3 +17,5 @@ services:
     command: python main.py
     restart: always
     network_mode: "host"
+    env_file:
+      - ".env"
