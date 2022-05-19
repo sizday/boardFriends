@@ -11,6 +11,7 @@ services:
     container_name: api
     build:
         context: ./app
+    command: python main.py
     ports:
       - "5000:5000"
     external_links:
