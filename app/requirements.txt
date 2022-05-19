@@ -5,4 +5,4 @@ flask-restplus==0.13.0
 Flask-SQLAlchemy==2.5.1
 psycopg2==2.9.3
 SQLAlchemy==1.4.36
-Werkzeug==2.1.2
+werkzeug==2.1.2
