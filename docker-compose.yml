@@ -20,6 +20,8 @@ services:
       - overlay
     ports:
       - "5000:80"
+    external_links:
+      - database
     env_file:
       - "app/.env"
 
