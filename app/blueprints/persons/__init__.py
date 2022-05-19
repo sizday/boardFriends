@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request
 from app.models import Person as PersonModel, db
 from flask_restplus import Namespace, Resource, fields
 
