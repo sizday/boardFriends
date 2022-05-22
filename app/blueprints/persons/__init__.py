@@ -1,5 +1,6 @@
 from flask import request
 from models import Person as PersonModel, db
+from flask_login import current_user, login_user, logout_user, login_required
 from flask_restx import Namespace, Resource, fields
 
 namespace = Namespace('persons', 'Person endpoints')

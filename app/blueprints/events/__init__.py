@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from models import Event as EventModel, Person as PersonModel, db
+from models import Event as EventModel, Person as PersonModel, db, token_required
 from flask_restx import Namespace, Resource, fields
 from blueprints.persons import person_model
 
@@ -55,6 +55,7 @@ class Events(Resource):
 
     @namespace.response(500, 'Internal Server error')
     @namespace.doc('Create new event')
+    @token_required
     @namespace.marshal_with(event_model, code=201)
     @namespace.expect(event_model, validate=True)
     def post(self):
@@ -124,6 +125,7 @@ class Event(Resource):
 
     @namespace.response(404, 'Event not found')
     @namespace.response(500, 'Internal Server error')
+    @token_required
     @namespace.doc('Add person to event')
     @namespace.expect(participation_model, validate=True)
     @namespace.marshal_with(event_model)
@@ -138,6 +140,7 @@ class Event(Resource):
     @namespace.response(400, 'Entity with the given name already exists')
     @namespace.response(404, 'Entity not found')
     @namespace.response(500, 'Internal Server error')
+    @token_required
     @namespace.doc('Delete person from event')
     @namespace.expect(participation_model, validate=True)
     @namespace.marshal_with(event_model)

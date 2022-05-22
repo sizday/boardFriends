@@ -2,9 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from uuid import uuid4
 from sqlalchemy.dialects.postgresql import UUID
+from flask_login import UserMixin
+from passlib.hash import pbkdf2_sha256
+from functools import wraps
+from flask import request, jsonify, make_response
+import jwt
+from config import Config
 
 db = SQLAlchemy()
-
 
 games_compilation = db.Table('games_compilation',
                              db.Column('event_id', UUID(as_uuid=True), db.ForeignKey('event.id')),
@@ -39,7 +44,7 @@ class Event(db.Model):
         return string
 
 
-class Person(db.Model):
+class Person(UserMixin, db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
@@ -81,3 +86,39 @@ class Place(db.Model):
     comment = db.Column(db.String(255))
     latitude = db.Column(db.Integer)
     longitude = db.Column(db.Integer)
+
+
+def authenticate(username, password):
+    user = Person.query.filter_by(username=username).first()
+    if user and pbkdf2_sha256.verify(password, user.password):
+        return user
+
+
+def identity(payload):
+    user_id = payload['identity']
+    return Person.query.get(user_id)
+
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        # jwt is passed in the request header
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+        # return 401 if token is not passed
+        if not token:
+            return jsonify({'message': 'Token is missing !!'}), 401
+
+        try:
+            # decoding the payload to fetch the stored details
+            data = jwt.decode(token, Config['SECRET_KEY'])
+            current_user = Person.query.filter_by(public_id=data['public_id']).first()
+        except:
+            return jsonify({
+                'message': 'Token is invalid !!'
+            }), 401
+        # returns the current logged in users contex to the routes
+        return f(current_user, *args, **kwargs)
+
+    return decorated
